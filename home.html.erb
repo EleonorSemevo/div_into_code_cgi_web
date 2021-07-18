@@ -19,5 +19,19 @@
       <input style="margin: 10px; width: 500px; height: 50px;" type="text"  name="input"  value="<%= data.join(' ') %>"><br>
       <input style="border-color: blue; padding: 10px;" type="submit" name="Soumettre" >
     </form>
+
+    <p> Self consumption Form</p>
+
+    <% result = connection.exec("select* from crops where give_for !='Self-consumption';") %>
+    <% data = [] %>
+    <% result.each do |record| %>
+      <%  data << "length：#{record["length"]} weight: #{record["weight"]}   quality: #{record["quality"]} give_for: #{record["give_for"]} date: #{record["date"]}" %>
+    <% end %>
+
+    <form action="consumption.cgi" method="POST">
+       Veuillez saisir les caractères ci-dessous<br><br>
+      <input style="margin: 10px; width: 500px; height: 50px;" type="text"  name="consumption"  value="<%= data.join(' ') %>"><br>
+      <input style="border-color: blue; padding: 10px;" type="submit" name="Envoyer" >
+    </form>
   </body>
 </html>

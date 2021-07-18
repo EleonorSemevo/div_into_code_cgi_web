@@ -16,4 +16,5 @@ server.mount('/goya.cgi', WEBrick::HTTPServlet::CGIHandler, 'goya.rb');
 
 server.mount('/', WEBrick::HTTPServlet::ERBHandler, 'home.html.erb')  #The arbitrary html page
 server.mount('/home.cgi', WEBrick::HTTPServlet::CGIHandler, 'home.rb')
+server.mount('/consumption.cgi', WEBrick::HTTPServlet::CGIHandler, 'consumption.rb')
 server.start
