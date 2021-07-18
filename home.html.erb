@@ -1,0 +1,23 @@
+<html>
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  </head>
+  <body>
+    <h1>tester! ! ! ! ! ! ! ! ! ! ! ! !</h1>
+    <% require 'pg' %>
+    <% connection = PG::connect(dbname: "goya") %>
+    <% connection.internal_encoding = "UTF-8" %>
+
+    <% result = connection.exec("select* from crops where quality=false;") %>
+    <% data = [] %>
+    <% result.each do |record| %>
+      <%  data << "length：#{record["length"]} weight: #{record["weight"]}   quality: #{record["quality"]} give_for: #{record["give_for"]} date: #{record["date"]}" %>
+    <% end %>
+
+    <form action="home.cgi" method="POST">
+       Veuillez saisir les caractères ci-dessous<br><br>
+      <input type="text"  name="input"  value="<%= data.join(' ') %>"><br>
+      <input type="submit" name="Soumettre" >
+    </form>
+  </body>
+</html>
